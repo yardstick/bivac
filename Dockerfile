@@ -6,7 +6,7 @@ RUN dep ensure -vendor-only
 COPY . .
 RUN make bivac
 
-FROM scratch
+FROM alpine
 COPY --from=builder /etc/ssl /etc/ssl
 COPY --from=builder /go/src/github.com/camptocamp/bivac/bivac /
 COPY --from=builder /go/src/github.com/camptocamp/bivac/providers-config.default.toml /
