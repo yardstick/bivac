@@ -69,7 +69,17 @@ func (o *KubernetesOrchestrator) GetVolumes() (volumes []*volume.Volume, err err
 
 	for _, namespace := range namespaces {
 		o.setNamespace(namespace)
-		pvcs, err := o.Client.CoreV1().PersistentVolumeClaims(o.Handler.Config.Kubernetes.Namespace).List(metav1.ListOptions{})
+		// todo: check if annotation exists and only get PVC's with annotations bivac.io/backup = true
+		opts := metav1.ListOptions{}
+
+		if o.Handler.Config.Kubernetes.OnlyAnnotated == true {
+			opts = metav1.ListOptions{
+				LabelSelector: "bivac.io/backup=true",
+			}
+		}
+
+		pvcs, err := o.Client.CoreV1().PersistentVolumeClaims(o.Handler.Config.Kubernetes.Namespace).List(opts)
+
 		if err != nil {
 			log.Errorf("failed to retrieve the list of PVCs: %v", err)
 		}
