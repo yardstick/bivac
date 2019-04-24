@@ -73,7 +73,7 @@ Kubernetes Options:
       --k8s-all-namespaces                Backup volumes of all namespaces. [$K8S_ALL_NAMESPACES]
       --k8s-kubeconfig=                   Path to your kubeconfig file. [$K8S_KUBECONFIG]
       --k8s-worker-service-account=       Specify service account for workers. [$K8S_WORKER_SERVICE_ACCOUNT]
-      --k8s-only-annotated                Only backup pvc's with the label "bivac.io/backup=true"
+      --k8s-only-annotated                Only backup pvc\'s with the label "bivac.io/backup=true"
       
 Cattle Options:
       --cattle-env=                       The Cattle environment. [$CATTLE_ENV]
